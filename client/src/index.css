@@ -1,0 +1,35 @@
+@import "@fontsource-variable/geist";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+
+  --background: #F5F7FA;
+
+  --surface: #FFFFFF;
+
+  --primary: #ED1C24;
+
+  --primary-hover: #D4171E;
+
+  --secondary: #1F3A6D;
+
+  --secondary-hover: #162C52;
+
+  --heading: #111827;
+
+  --text: #6B7280;
+
+  --border: #E5E7EB;
+
+  --soft-blue: #EEF2FF;
+
+  --soft-blue-2: #E0E7FF;
+
+  --danger: #DC2626;
+
+  --success: #16A34A;
+}

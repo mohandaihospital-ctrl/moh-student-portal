@@ -1,0 +1,6 @@
+const PAYMENT_CONFIG = {
+  ADMISSION_AMOUNT: 1150,
+};
+
+module.exports =
+  PAYMENT_CONFIG;
