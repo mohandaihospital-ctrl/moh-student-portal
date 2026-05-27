@@ -21,8 +21,16 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://moh-student-portal.vercel.app/",
+    ],
+
+    credentials: true,
+  })
+);app.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
