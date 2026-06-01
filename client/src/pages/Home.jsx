@@ -18,7 +18,7 @@ export default function LandingPage() {
 
             {/* <div>
               <h1 className="text-2xl font-bold text-[#111827]">
-                Student Portal
+                MOH Student Portal
               </h1>
 
               <p className="text-sm text-gray-500">
@@ -201,7 +201,7 @@ export default function LandingPage() {
       <footer className="border-t border-gray-200 bg-white">
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm text-center md:text-left">
-            © 2026 Student Portal. All rights reserved.
+            © 2026 MOH Student Portal. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6 text-sm text-gray-500">

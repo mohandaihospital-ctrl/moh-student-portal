@@ -22,7 +22,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+emailVerified: {
+  type: Boolean,
+  default: false,
+},
 
+emailOtp: {
+  type: String,
+  default: null,
+},
+
+emailOtpExpiry: {
+  type: Date,
+  default: null,
+},
     selectedCourse: {
       type: String,
       enum: ["bsc_nursing", "post_bsc", "gnm"],

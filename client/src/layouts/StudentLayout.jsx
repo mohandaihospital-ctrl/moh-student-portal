@@ -107,7 +107,7 @@ const StudentLayout = () => {
 
                 <h2 className="text-lg font-bold text-[var(--heading)]">
 
-                  Student Portal
+                  MOH Student Portal
 
                 </h2>
 

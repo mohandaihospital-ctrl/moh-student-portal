@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState , useEffect } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -53,18 +53,22 @@ const registerSchema = z
       ),
 
     password: z
-      .string()
-      .min(
-        6,
-        "Password must be at least 6 characters"
-      ),
+  .string()
+  .min(
+    8,
+    "Password must be at least 8 characters"
+  )
+  .regex(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/,
+    "Password must contain uppercase, lowercase and number"
+  ),
 
-    confirmPassword: z
-      .string()
-      .min(
-        6,
-        "Confirm your password"
-      ),
+confirmPassword: z
+  .string()
+  .min(
+    8,
+    "Confirm your password"
+  ),
 
     selectedCourse: z
       .string()
@@ -99,19 +103,35 @@ const Register = () => {
   const [loading, setLoading] =
     useState(false);
 
+  const [otp, setOtp] =
+  useState("");
+
+const [otpSent, setOtpSent] =
+  useState(false);
+
+const [otpLoading, setOtpLoading] =
+  useState(false);
+
+const [emailVerified, setEmailVerified] =
+  useState(false);
+
   const [showPassword, setShowPassword] =
     useState(false);
+
+const [countdown, setCountdown] =
+  useState(0);
 
   const [
     showConfirmPassword,
     setShowConfirmPassword,
   ] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+ const {
+  register,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm({
     resolver:
       zodResolver(registerSchema),
 
@@ -125,8 +145,118 @@ const Register = () => {
     },
   });
 
+const sendOtp = async () => {
+
+  if (countdown > 0) {
+    return;
+  }
+
+  try {
+
+    const email = watch("email");
+
+    if (!email) {
+
+      return toast.error(
+        "Enter email first"
+      );
+    }
+
+    setOtpLoading(true);
+
+    await api.post(
+      "/auth/send-otp",
+      {
+        email,
+      }
+    );
+
+    setOtpSent(true);
+
+    setCountdown(60);
+
+    toast.success(
+      "OTP sent successfully"
+    );
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data
+        ?.message ||
+        "Failed to send OTP"
+    );
+
+  } finally {
+
+    setOtpLoading(false);
+  }
+};
+
+  const verifyOtp =
+  async () => {
+
+    try {
+
+      const email =
+        watch("email");
+
+      await api.post(
+        "/auth/verify-otp",
+        {
+          email,
+          otp,
+        }
+      );
+
+      setEmailVerified(
+        true
+      );
+
+      toast.success(
+        "Email verified successfully"
+      );
+
+    } catch (error) {
+
+      toast.error(
+        error.response?.data
+          ?.message ||
+          "Invalid OTP"
+      );
+    }
+  };
+
+useEffect(() => {
+
+  if (countdown <= 0) {
+    return;
+  }
+
+  const timer = setInterval(() => {
+
+    setCountdown(
+      (prev) => prev - 1
+    );
+
+  }, 1000);
+
+  return () =>
+    clearInterval(timer);
+
+}, [countdown]);
+
   const onSubmit =
     async (formData) => {
+
+if (!emailVerified) {
+
+  toast.error(
+    "Please verify your email first"
+  );
+
+  return;
+}
 
       try {
 
@@ -213,7 +343,7 @@ const Register = () => {
 
                 <h2 className="text-2xl font-bold text-[var(--heading)]">
 
-                  Student Portal
+                  MOH Student Portal
 
                 </h2>
 
@@ -336,7 +466,7 @@ Program Brochures
 
               <h2 className="font-bold text-[var(--heading)]">
 
-                Student Portal
+                MOH Student Portal
 
               </h2>
 
@@ -406,32 +536,114 @@ Program Brochures
 
               {/* EMAIL */}
 
-              <div className="space-y-2">
+            <div className="space-y-2">
 
-                <Label className="text-[var(--heading)]">
+  <Label className="text-[var(--heading)]">
 
-                  Email Address
+    Email Address
 
-                </Label>
+  </Label>
 
-                <Input
-                  {...register("email")}
-                  type="email"
-                  placeholder="Enter your email"
-                  className="h-12 border-[var(--border)] focus-visible:ring-[var(--primary)]"
-                />
+  <div className="flex gap-2">
 
-                {errors.email && (
+    <Input
+      {...register("email")}
+      type="email"
+      placeholder="Enter your email"
+      disabled={emailVerified}
+      className="h-12 border-[var(--border)] focus-visible:ring-[var(--primary)]"
+    />
 
-                  <p className="text-sm text-[var(--danger)]">
+    <Button
+      type="button"
+      onClick={sendOtp}
+      disabled={
+        otpLoading ||
+        emailVerified
+      }
+      className="h-12"
+    >
 
-                    {errors.email.message}
+      {emailVerified
+        ? "Verified"
+        : otpLoading
+        ? "Sending..."
+        : "Verify"}
 
-                  </p>
+    </Button>
 
-                )}
+  </div>
 
-              </div>
+  {otpSent &&
+    !emailVerified && (
+<>
+      <div className="flex gap-2 mt-2">
+
+        <Input
+          value={otp}
+          onChange={(e) =>
+            setOtp(
+              e.target.value
+            )
+          }
+          placeholder="Enter OTP"
+        />
+
+        <Button
+          type="button"
+          onClick={
+            verifyOtp
+          }
+        >
+
+          Verify OTP
+
+        </Button>
+
+      </div>
+
+<div className="flex items-center justify-between mt-2">
+
+  <p className="text-sm text-[var(--text)]">
+    Didn't receive OTP?
+  </p>
+
+ <button
+  type="button"
+  onClick={sendOtp}
+  disabled={
+    countdown > 0
+  }
+  className="text-sm font-medium text-[var(--primary)]"
+>
+  {countdown > 0
+    ? `Resend in ${countdown}s`
+    : "Resend OTP"}
+</button>
+
+</div>
+      </>
+    )}
+
+  {emailVerified && (
+
+    <p className="text-sm text-green-600 font-medium">
+
+      ✓ Email Verified
+
+    </p>
+  )}
+
+  {errors.email && (
+
+    <p className="text-sm text-[var(--danger)]">
+
+      {errors.email.message}
+
+    </p>
+  )}
+
+</div>
 
               {/* MOBILE */}
 

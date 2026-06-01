@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Download,
   FileText,
+  FileCheck,
   Receipt,
   CreditCard,
   CheckCircle2,
@@ -97,7 +98,7 @@ const Downloads = () => {
           data.order.currency,
 
         name:
-          "Student Portal",
+          "MOH Student Portal",
 
         description:
           "Admission Payment",
@@ -531,7 +532,7 @@ if (!user?.hasPurchased) {
 
           Download your admission brochure
           and payment invoice documents from
-          your student portal dashboard.
+          your MOH Student Portal dashboard.
 
         </p>
 
@@ -539,7 +540,7 @@ if (!user?.hasPurchased) {
 
       {/* DOWNLOAD CARDS */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
         {/* BROCHURE */}
 
@@ -638,6 +639,62 @@ if (!user?.hasPurchased) {
           </CardContent>
 
         </Card>
+
+        {/* ADMISSION FORM */}
+
+<Card className="border border-[var(--border)] rounded-3xl shadow-sm bg-[var(--surface)] hover:shadow-md transition">
+
+  <CardContent className="p-8">
+
+    <div className="w-16 h-16 rounded-2xl bg-[var(--soft-blue)] flex items-center justify-center mb-6">
+
+      <FileCheck
+        size={30}
+        className="text-[var(--primary)]"
+      />
+
+    </div>
+
+    <h3 className="text-2xl font-bold text-[var(--heading)]">
+
+      Admission Form
+
+    </h3>
+
+    <p className="text-[var(--text)] mt-3 leading-relaxed">
+
+      Download the official admission form PDF,
+      complete the required information, and
+      keep it ready for the admission process.
+
+    </p>
+
+    <Button
+      asChild
+      className="w-full mt-8 h-12 rounded-2xl bg-[var(--primary)] hover:bg-[var(--primary-hover)]"
+    >
+
+      <a
+        href="/admission-form.pdf"
+        download
+        target="_blank"
+        rel="noreferrer"
+      >
+
+        <Download
+          size={18}
+          className="mr-2"
+        />
+
+        Download Form
+
+      </a>
+
+    </Button>
+
+  </CardContent>
+
+</Card>
 
       </div>
 

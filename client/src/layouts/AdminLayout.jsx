@@ -227,7 +227,7 @@ const AdminLayout = () => {
 
                 <h4 className="text-sm font-semibold text-[var(--heading)]">
 
-                  Student Portal
+                  MOH Student Portal
 
                 </h4>
 

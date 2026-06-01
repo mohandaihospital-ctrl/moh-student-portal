@@ -1,5 +1,5 @@
 const PAYMENT_CONFIG = {
-  ADMISSION_AMOUNT: 1150,
+  ADMISSION_AMOUNT: 1200,
 };
 
 module.exports =

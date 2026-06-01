@@ -23,6 +23,8 @@ import { AuthContext } from "@/context/AuthContext";
 import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+
 
 import { Button } from "@/components/ui/button";
 
@@ -80,25 +82,19 @@ const Login = () => {
 
         setUser(data.user);
 
-        if (
-          data.user.role ===
-          "admin"
-        ) {
+       toast.success("Login successful");
 
-          navigate(
-            "/admin/dashboard"
-          );
-
-        } else {
-
-          navigate("/dashboard");
-        }
+if (data.user.role === "admin") {
+  navigate("/admin/dashboard");
+} else {
+  navigate("/dashboard");
+}
 
       } catch (error) {
 
         console.log(error);
 
-        alert(
+        toast.error(
           error.response?.data
             ?.message ||
             "Login failed"
@@ -135,7 +131,7 @@ const Login = () => {
               <div>
 
                 <h2 className="text-2xl font-bold text-[var(--heading)]">
-                  Student Portal
+                  MOH Student Portal
                 </h2>
 
                 <p className="text-[var(--text)] text-sm mt-1">
@@ -240,7 +236,7 @@ const Login = () => {
             <div>
 
               <h2 className="font-bold text-[var(--heading)]">
-                Student Portal
+                MOH Student Portal
               </h2>
 
               <p className="text-sm text-[var(--text)]">
@@ -262,7 +258,7 @@ const Login = () => {
               </h2>
 
               <p className="text-[var(--text)] mt-2">
-                Login to access your student portal and brochure downloads
+                Login to access your MOH Student Portal and brochure downloads
               </p>
 
             </div>
@@ -315,7 +311,14 @@ const Login = () => {
                     {errors.password.message}
                   </p>
                 )}
-
+<div className="flex justify-end">
+  <Link
+    to="/forgot-password"
+    className="text-sm text-[var(--primary)] hover:underline"
+  >
+    Forgot Password?
+  </Link>
+</div>
               </div>
 
               {/* BUTTON */}

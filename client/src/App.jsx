@@ -5,6 +5,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
 import AdminLogin from "@/pages/auth/AdminLogin";
+import ForgotPassword from "@/pages/ForgotPassword";
 
 import Dashboard from "@/pages/student/Dashboard";
 import Application from "@/pages/student/Application";
@@ -49,6 +50,11 @@ function App() {
           path="/admin/login"
           element={<AdminLogin />}
         />
+
+        <Route
+  path="/forgot-password"
+  element={<ForgotPassword />}
+/>
 
         {/* STUDENT */}
 

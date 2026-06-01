@@ -26,11 +26,13 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://moh-student-portal.vercel.app",
+      "https://mohnursing.com",
+      "https://www.mohnursing.com",
     ],
-
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 

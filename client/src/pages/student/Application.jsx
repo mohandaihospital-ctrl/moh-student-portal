@@ -225,13 +225,22 @@ sections: [],
 
       if (loading) return;
 
-      const missingDocuments =
-        currentCourse.documents.filter(
-          (doc) =>
-            !documents[
-              doc.key
-            ]
-        );
+    const optionalDocuments = [
+  "residenceCertificate",
+  "casteCertificate",
+  "apaarId",
+];
+
+const missingDocuments =
+  currentCourse.documents.filter(
+    (doc) =>
+      !optionalDocuments.includes(
+        doc.key
+      ) &&
+      !documents[
+        doc.key
+      ]
+  );
 
       if (
         missingDocuments.length > 0
@@ -718,7 +727,13 @@ sections: [],
 
                         className="border-[var(--border)] bg-[var(--surface)]"
 
-                        required
+                        required={
+  ![
+    "residenceCertificate",
+    "casteCertificate",
+    "apaarId",
+  ].includes(item.key)
+}
                       />
 
                       {documents[

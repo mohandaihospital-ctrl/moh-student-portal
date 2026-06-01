@@ -201,9 +201,6 @@ const commonFields = [
     label: "Residence Status",
     type: "text",
 
-    validation: {
-      required: true,
-    },
   },
 
   {
@@ -279,12 +276,12 @@ const commonDocuments = [
 
   {
     key: "residenceCertificate",
-    label: "Residence Certificate",
+    label: "Residence Certificate (Optional)",
   },
 
   {
     key: "casteCertificate",
-    label: "Caste Certificate",
+    label: "Caste Certificate (Optional)",
   },
 
   {
@@ -319,23 +316,35 @@ export const courseForms = {
         name: "ppmetRollNo",
         label: "PPMET Roll Number",
         type: "text",
+
+        validation: {
+    required: true,
+  },
       },
 
       {
         name: "monthYear",
         label: "Month & Year",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "tenthDetails",
         label: "10th Details",
         type: "textarea",
+        
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "plusOneDetails",
-        label: "+1 Details",
+        label: "+1 Details (Optional)",
         type: "textarea",
       },
 
@@ -343,6 +352,10 @@ export const courseForms = {
         name: "plusTwoDetails",
         label: "+2 Details",
         type: "textarea",
+
+        validation: {
+          required: true,
+        },
       },
     ],
   },
@@ -360,18 +373,30 @@ export const courseForms = {
         name: "ppmetMarks",
         label: "PPMET Marks",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "percentile",
         label: "Percentile",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "socialCategory",
         label: "Social Category",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
@@ -383,6 +408,10 @@ export const courseForms = {
           "Government",
           "Management",
         ],
+
+        validation: {
+          required: true,
+        },
       },
     ],
   },
@@ -429,7 +458,7 @@ export const courseForms = {
 
       {
         key: "apaarId",
-        label: "Apaar ID",
+        label: "Apaar ID (Optional)",
       },
     ],
   },
@@ -453,12 +482,20 @@ export const courseForms = {
         name: "pnrcApplicationNo",
         label: "PNRC Application Number",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "subCategory",
         label: "Sub Category",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
     ],
   },
@@ -534,54 +571,90 @@ export const courseForms = {
           "Yes",
           "No",
         ],
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "ppmetRollNo",
         label: "PPMET Roll Number",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "monthYear",
         label: "Month & Year",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "tenthDetails",
         label: "10th Details",
         type: "textarea",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "plusTwoDetails",
         label: "+2 Details",
         type: "textarea",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "gnmDetails",
         label: "GNM Details",
         type: "textarea",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "gnmState",
         label: "GNM State",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "rnrmNumber",
         label: "RNRM Number",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "nursingCouncil",
         label: "Nursing Council",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
     ],
   },
@@ -599,18 +672,30 @@ export const courseForms = {
         name: "ppmetMarks",
         label: "PPMET Marks",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "percentile",
         label: "Percentile",
         type: "text",
+
+        validation: {
+          required: true,
+        },
       },
 
       {
         name: "clinicalExperience",
         label: "Clinical Experience",
         type: "textarea",
+
+        validation: {
+          required: true,
+        },
       },
     ],
   },
