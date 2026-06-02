@@ -18,9 +18,9 @@ const sendEmail = async (
         host:
           "smtp-relay.brevo.com",
 
-        port: 587,
+        port: 465,
 
-        secure: false,
+        secure: true,
 
         auth: {
           user:
