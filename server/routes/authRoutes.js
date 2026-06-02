@@ -43,24 +43,7 @@ router.post(
   resetPassword
 );
 
-router.get("/email-test", async (req, res) => {
-  try {
-    await sendEmail(
-      "yourpersonalemail@gmail.com",
-      "Test Email",
-      "<h1>Test</h1>"
-    );
 
-    res.json({
-      success: true,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-});
 
 router.get("/me", protect, getMe);
 
