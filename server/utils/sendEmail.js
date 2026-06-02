@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const SibApiV3Sdk = require("sib-api-v3-sdk");
 
 const sendEmail = async (
   email,
@@ -13,39 +13,42 @@ const sendEmail = async (
       email
     );
 
-    const transporter =
-      nodemailer.createTransport({
-        host:
-          "smtp-relay.brevo.com",
+    const client =
+      SibApiV3Sdk.ApiClient.instance;
 
-        port: 465,
+    const apiKey =
+      client.authentications["api-key"];
 
-        secure: true,
+    apiKey.apiKey =
+      process.env.BREVO_API_KEY;
 
-        auth: {
-          user:
-            process.env.BREVO_USER,
+    const apiInstance =
+      new SibApiV3Sdk.TransactionalEmailsApi();
 
-          pass:
-            process.env.BREVO_PASS,
+    const result =
+      await apiInstance.sendTransacEmail({
+        sender: {
+          email:
+            process.env.EMAIL_USER,
+          name:
+            "MOH Student Portal",
         },
-      });
 
-    const info =
-      await transporter.sendMail({
-        from:
-          process.env.EMAIL_USER,
-
-        to: email,
+        to: [
+          {
+            email,
+          },
+        ],
 
         subject,
 
-        html,
+        htmlContent:
+          html,
       });
 
     console.log(
       "EMAIL SENT:",
-      info.messageId
+      result
     );
 
   } catch (error) {
