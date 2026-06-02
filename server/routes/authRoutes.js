@@ -12,6 +12,9 @@ verifyOtp,
 
 const protect = require("../middleware/authMiddleware");
 
+const {
+  sendEmail,
+} = require("../utils/sendEmail");
 
 
 const router = express.Router();
