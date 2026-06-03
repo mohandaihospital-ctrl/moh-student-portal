@@ -47,8 +47,8 @@ function App() {
         />
 
         <Route
-          path="/admin/login"
-          element={<AdminLogin />}
+          path="/login"
+          element={<Login />}
         />
 
         <Route

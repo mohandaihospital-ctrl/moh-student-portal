@@ -20,7 +20,7 @@ return (
  
 
   if (!user || user.role !== "admin") {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/login" />;
   }
 
   return children;
