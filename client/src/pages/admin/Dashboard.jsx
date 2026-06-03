@@ -8,24 +8,103 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const Dashboard = () => {
 
-  const stats = [
+  const [stats, setStats] =
+    useState(null);
+
+  const [recentStudents,
+    setRecentStudents] =
+    useState([]);
+
+  const [loading,
+    setLoading] =
+    useState(true);
+
+  useEffect(() => {
+
+    const fetchDashboard =
+      async () => {
+
+        try {
+
+          const token =
+            localStorage.getItem(
+              "token"
+            );
+
+          const config = {
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+          };
+
+          const statsRes =
+            await axios.get(
+              `${import.meta.env.VITE_API_URL}/admin/dashboard-stats`,
+              config
+            );
+
+          const applicationsRes =
+            await axios.get(
+              `${import.meta.env.VITE_API_URL}/admin/applications`,
+              config
+            );
+
+          setStats(
+            statsRes.data.stats
+          );
+
+          setRecentStudents(
+            applicationsRes.data.applications.slice(
+              0,
+              5
+            )
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Dashboard Error:",
+            error
+          );
+
+        } finally {
+
+          setLoading(false);
+
+        }
+      };
+
+    fetchDashboard();
+
+  }, []);
+
+  const dashboardStats = [
     {
       title: "Total Students",
-      value: "120",
+      value:
+        stats?.totalStudents || 0,
       icon: Users,
-      color: "text-[var(--primary)]",
-      bg: "bg-[var(--soft-blue)]",
+      color:
+        "text-[var(--primary)]",
+      bg:
+        "bg-[var(--soft-blue)]",
     },
 
     {
       title:
         "Applications Submitted",
 
-      value: "95",
+      value:
+        stats?.totalApplications || 0,
 
-      icon: FileCheck2,
+      icon:
+        FileCheck2,
 
       color:
         "text-green-600",
@@ -38,7 +117,8 @@ const Dashboard = () => {
       title:
         "Payments Completed",
 
-      value: "72",
+      value:
+        stats?.totalPaidStudents || 0,
 
       icon:
         CreditCard,
@@ -54,7 +134,8 @@ const Dashboard = () => {
       title:
         "Pending Applications",
 
-      value: "25",
+      value:
+        stats?.pendingPayments || 0,
 
       icon:
         Clock3,
@@ -67,49 +148,14 @@ const Dashboard = () => {
     },
   ];
 
-  const recentStudents = [
-    {
-      name:
-        "Aman Saini",
+  if (loading) {
+    return (
+      <div className="p-10">
+        Loading Dashboard...
+      </div>
+    );
+  }  
 
-      course:
-        "B.Sc Nursing",
-
-      application:
-        "Submitted",
-
-      payment:
-        "Pending",
-    },
-
-    {
-      name:
-        "Rahul Sharma",
-
-      course:
-        "GNM",
-
-      application:
-        "Submitted",
-
-      payment:
-        "Paid",
-    },
-
-    {
-      name:
-        "Priya Verma",
-
-      course:
-        "Post B.Sc",
-
-      application:
-        "Pending",
-
-      payment:
-        "Pending",
-    },
-  ];
 
   return (
     <div className="space-y-6">
@@ -202,7 +248,7 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-        {stats.map((item) => {
+       {dashboardStats.map((item) => {
 
           const Icon =
             item.icon;
@@ -336,8 +382,7 @@ const Dashboard = () => {
 
                         <div className="w-11 h-11 rounded-full bg-[var(--soft-blue)] flex items-center justify-center text-[var(--primary)] font-semibold">
 
-                          {student.name
-                            .charAt(0)}
+                        {student.userId?.name?.charAt(0)}
 
                         </div>
 
@@ -345,8 +390,7 @@ const Dashboard = () => {
 
                           <h4 className="font-semibold text-[var(--heading)]">
 
-                            {student.name}
-
+{student.userId?.name}
                           </h4>
 
                           <p className="text-sm text-[var(--text)]">
@@ -363,16 +407,14 @@ const Dashboard = () => {
 
                     <td className="p-5 text-[var(--heading)] font-medium">
 
-                      {student.course}
-
+{student.userId?.selectedCourse}
                     </td>
 
                     <td className="p-5">
 
                       <span
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium ${
-                          student.application ===
-                          "Submitted"
+                          student.userId?.profileCompleted
                             ? "bg-green-100 text-green-700"
                             : "bg-amber-100 text-amber-700"
                         }`}
@@ -382,8 +424,9 @@ const Dashboard = () => {
                           size={14}
                         />
 
-                        {student.application}
-
+{student.userId?.profileCompleted
+  ? "Submitted"
+  : "Pending"}
                       </span>
 
                     </td>
@@ -392,8 +435,7 @@ const Dashboard = () => {
 
                       <span
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium ${
-                          student.payment ===
-                          "Paid"
+                          student.userId?.hasPurchased
                             ? "bg-green-100 text-green-700"
                             : "bg-red-100 text-red-600"
                         }`}
@@ -403,8 +445,9 @@ const Dashboard = () => {
                           size={14}
                         />
 
-                        {student.payment}
-
+{student.userId?.hasPurchased
+  ? "Paid"
+  : "Pending"}
                       </span>
 
                     </td>
