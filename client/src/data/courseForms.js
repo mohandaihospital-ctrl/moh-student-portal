@@ -322,19 +322,19 @@ export const courseForms = {
   },
       },
 
-      {
-        name: "monthYear",
-        label: "Month & Year",
-        type: "text",
+      // {
+      //   name: "monthYear",
+      //   label: "Month & Year",
+      //   type: "text",
 
-        validation: {
-          required: true,
-        },
-      },
+      //   validation: {
+      //     required: true,
+      //   },
+      // },
 
       {
         name: "tenthDetails",
-        label: "10th Details",
+        label: "10th Details (Board/Year/Obtained Marks/Total Marks/Percentage)",
         type: "textarea",
         
         validation: {
@@ -344,13 +344,13 @@ export const courseForms = {
 
       {
         name: "plusOneDetails",
-        label: "+1 Details (Optional)",
+        label: "+1 Details (Board/Year/Obtained Marks/Total Marks/Percentage) (Optional)",
         type: "textarea",
       },
 
       {
         name: "plusTwoDetails",
-        label: "+2 Details",
+        label: "+2 Details (Board/Year/Obtained Marks/Total Marks/Percentage)",
         type: "textarea",
 
         validation: {
@@ -587,19 +587,19 @@ export const courseForms = {
         },
       },
 
-      {
-        name: "monthYear",
-        label: "Month & Year",
-        type: "text",
+      // {
+      //   name: "monthYear",
+      //   label: "Month & Year",
+      //   type: "text",
 
-        validation: {
-          required: true,
-        },
-      },
+      //   validation: {
+      //     required: true,
+      //   },
+      // },
 
       {
         name: "tenthDetails",
-        label: "10th Details",
+        label: "10th Details (Board/Year/Obtained Marks/Total Marks/Percentage)",
         type: "textarea",
 
         validation: {
@@ -609,7 +609,7 @@ export const courseForms = {
 
       {
         name: "plusTwoDetails",
-        label: "+2 Details",
+        label: "+2 Details (Board/Year/Obtained Marks/Total Marks/Percentage)",
         type: "textarea",
 
         validation: {

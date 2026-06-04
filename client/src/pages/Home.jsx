@@ -39,7 +39,7 @@ export default function LandingPage() {
               href="/register"
               className="px-5 h-11 flex items-center justify-center rounded-xl bg-[#ED1C24] text-white text-sm font-medium hover:bg-[#d4171e] transition"
             >
-              Download Brochure
+             Download Prospectus
             </a>
           </div>
         </div>
