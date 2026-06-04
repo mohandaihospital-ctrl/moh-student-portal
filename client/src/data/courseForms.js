@@ -499,7 +499,52 @@ export const courseForms = {
       },
     ],
   },
+
+  {
+  title: "Academic Qualifications",
+
+  description:
+    "Educational qualification details",
+
+  fields: [
+
+    {
+      name: "tenthDetails",
+      label:
+        "10th Details (School/Board/Year/Max Marks/Obtained Marks/Percentage)",
+      type: "textarea",
+
+      validation: {
+        required: true,
+      },
+    },
+
+    {
+      name: "plusOneDetails",
+      label:
+        "10+1 Details (School/Board/Year/Stream/Max Marks/Obtained Marks/Percentage)",
+      type: "textarea",
+
+      validation: {
+        required: true,
+      },
+    },
+
+    {
+      name: "plusTwoDetails",
+      label:
+        "10+2 Details (School/Board/Year/Stream/Max Marks/Obtained Marks/Percentage)",
+      type: "textarea",
+
+      validation: {
+        required: true,
+      },
+    },
+  ],
+},
 ],
+
+
 
     documents: [
 
@@ -619,7 +664,8 @@ export const courseForms = {
 
       {
         name: "gnmDetails",
-        label: "GNM Details",
+label:
+"GNM Details (Institute/Board/Year/Max Marks/Obtained Marks/Percentage)",
         type: "textarea",
 
         validation: {
