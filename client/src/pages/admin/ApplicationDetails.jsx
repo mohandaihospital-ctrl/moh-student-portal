@@ -713,7 +713,7 @@ const ApplicationDetails = () => {
 
       {/* ACTIONS */}
 
-      <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4">
+      {/* <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4">
 
         <Button
           onClick={() =>
@@ -758,7 +758,7 @@ const ApplicationDetails = () => {
 
         </Button>
 
-      </div>
+      </div> */}
 
     </div>
   );
