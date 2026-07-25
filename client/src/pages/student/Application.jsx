@@ -229,6 +229,7 @@ sections: [],
   "residenceCertificate",
   "casteCertificate",
   "apaarId",
+  "feeSlip",
 ];
 
 const missingDocuments =
