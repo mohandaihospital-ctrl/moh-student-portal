@@ -438,7 +438,8 @@ export const courseForms = {
 
       {
         key: "feeSlip",
-        label: "University Fee Slip",
+        label: "University Fee Slip(Optional)",
+         required: false,
       },
 
       {
@@ -768,7 +769,8 @@ label:
 
       {
         key: "feeSlip",
-        label: "University Fee Slip",
+        label: "University Fee Slip (Optional)",
+         required: false,
       },
 
       {
