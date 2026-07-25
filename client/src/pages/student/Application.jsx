@@ -732,6 +732,7 @@ const missingDocuments =
     "residenceCertificate",
     "casteCertificate",
     "apaarId",
+    "feeSlip",
   ].includes(item.key)
 }
                       />
